@@ -1,0 +1,71 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{{ STATIC_PREFIX }}js/jquery.min.js"></script>
+    <style>
+        .status_element {
+            border: 3px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            float: left;
+            margin: 10px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        $(document).ready(function() {
+            window.setInterval(checkHealthStatus, 5000);
+        });
+
+        function get_csrftoken(){
+           return $("#csrf_token_container > input").val();
+        }
+
+        function checkHealthStatus(){
+            $.ajax({
+              type: "POST",
+              url: "/ajax/check_health/",
+              data: {csrfmiddlewaretoken: get_csrftoken()}
+            }).done(function( data ) {
+                updateHealth(data);
+            });
+        }
+
+
+        function updateHealth(data){
+            for (element in data){
+                var div = $("#" + element);
+                $(div).removeClass("red");
+                $(div).removeClass("green");
+                $(div).removeClass("yellow");
+                $(div).addClass(data[element].status);
+            }
+        }
+    </script>
+
+
+
+    {% for element in services %}
+        <div id="{{ element }}" class="status_element red">{{ element }}</div>
+    {% endfor %}
+
+
+    <div id="csrf_token_container">{% csrf_token %}</div>
+</body>

@@ -1,0 +1,18 @@
+<table border=1>
+    <thead>
+        <tr>
+            <th>Context</th>
+            <th>Name</th>
+            <th>Return Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+{% for m in methods %}
+    <tr>
+        <td>{{ m.0 }}</td>
+        <td>{{ m.1 }}</td>
+        <td>{{ m.2.returns }}</td>
+        <td>{{ m.3}}</td>
+    </tr>
+{% endfor %}
+</table>
