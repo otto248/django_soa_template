@@ -1,15 +1,25 @@
+from django.core.context_processors import csrf
 from django.http import HttpResponse
-from django.views.generic import ListView, View
-from payment.service_client import PaymentServiceClient
-
-__author__ = 'sheepy'
+from django.shortcuts import render_to_response
+from django.views.generic import View
 
 
 class PaymentController(View):
 
-    def __init__(self):
-        self.payment_service_client = PaymentServiceClient()
+    # Define the APIs used
+    paymentAPI = None
+
+    def __init__(self, paymentAPI):
+        self.paymentAPI = paymentAPI
 
     def get(self, request):
-        response = HttpResponse(self.payment_service_client.make_payment("Test"))
+
+
+        c = {"result" : self.paymentAPI.paymentServiceClient.make_payment("Test")}
+        c.update(csrf(request))
+
+        return render_to_response("payment.pyhtml", c)
+
+    def post(self, request):
+        response = HttpResponse("You made a post")
         return response

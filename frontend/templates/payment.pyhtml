@@ -1,0 +1,4 @@
+<form submit="/test" method="post">
+    <input type="submit" value="Submit">
+    <div id="csrf_token_container">{% csrf_token %}</div>
+</form>

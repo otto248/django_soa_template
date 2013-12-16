@@ -4,7 +4,12 @@ from django.conf.urls import patterns, url
 # from django.contrib import admin
 # admin.autodiscover()
 from frontend.controller.PaymentController import PaymentController
+from payment.api.PaymentAPI import PaymentAPI
 
+
+
+# Create the controller used for the mapping
+payment_controller = PaymentController.as_view(paymentAPI=PaymentAPI())
 
 urlpatterns = patterns('',
     # Examples:
@@ -16,5 +21,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^test/', PaymentController.as_view())
+    url(r'^payment/', payment_controller)
 )

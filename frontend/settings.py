@@ -112,6 +112,7 @@ WSGI_APPLICATION = 'frontend.wsgi.application'
 
 import os
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
+TEMPLATE_DIRS += (os.path.join(os.path.dirname(__file__), '..', 'frontend','templates').replace('\\','/'),)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
