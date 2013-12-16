@@ -2,7 +2,7 @@
 import os
 import sys
 
-from registry.RegistryClient import RegistryClient
+from registry.client.RegistryClient import RegistryClient
 
 if __name__ == "__main__":
     from django.core.management import execute_from_command_line

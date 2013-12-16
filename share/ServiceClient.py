@@ -1,5 +1,5 @@
 import xmlrpclib
-from registry.RegistryClient import RegistryClient
+from registry.client.RegistryClient import RegistryClient
 
 
 class ServiceClient():
