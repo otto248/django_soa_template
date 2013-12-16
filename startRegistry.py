@@ -9,7 +9,7 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "registry.settings")
 
     # Add Arguments for StartUp
-    sys.argv = ["manage.py", "runserver", "localhost:5555"]
+    args = ["manage.py", "runserver", "localhost:5555"]
 
     # Start it
-    execute_from_command_line(sys.argv)
+    execute_from_command_line(args)

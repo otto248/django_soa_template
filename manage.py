@@ -2,7 +2,6 @@
 import os
 import sys
 
-from testrpc.settings_helper import DJANGO_STARTUP_APP_KEY
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "testrpc.settings")

@@ -1,6 +1,7 @@
 # Django settings for testrpc project.
 import payment
 import xmlrpc
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,10 +12,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+HOME = os.environ["HOME"]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/sheepy/payment',                      # Or path to database file if using sqlite3.
+        'NAME': HOME + '/payment',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
