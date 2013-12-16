@@ -3,6 +3,8 @@ from django.conf.urls import patterns, url
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
+from frontend.controller.PaymentController import PaymentController
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -14,11 +16,5 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
-    url(r'^xmlrpc/$', 'xmlrpc.views.handle_xmlrpc', name='xmlrpc'),
-
-    # The View url for the services
-    url(r'^registry/$', 'registry.methods.view_services'),
-    url(r'^health/$', 'registry.methods.get_healthcheck_page'),
-    url(r'^ajax/check_health/', 'registry.methods.check_health'),
-
+    url(r'^test/', PaymentController.as_view())
 )

@@ -1,5 +1,7 @@
 # Django settings for testrpc project.
-from testrpc.settings_helper import get_environmental_start_apps
+import location
+import payment
+import xmlrpc
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -104,10 +106,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'testrpc.urls'
+ROOT_URLCONF = 'location.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'testrpc.wsgi.application'
+WSGI_APPLICATION = 'location.wsgi.application'
 
 import os
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
@@ -119,26 +121,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'testrpc'
+    'xmlrpc',
+    'location'
 )
 
-XMLRPC_METHODS = (('xmlrpc.views.test_xmlrpc', 'test_xmlrpc'), ('xmlrpc.views.ping', 'ping'),)
-
-# Get the Apps that should be loaded
-DYNAMIC_APPS = get_environmental_start_apps()
-
-if DYNAMIC_APPS is not None:
-    # Try to Import the modules and put the XMLRPC_METHODS together
-    # They are defined in __init__.py
-    try:
-        for app in DYNAMIC_APPS:
-            app_module = __import__(app)
-            XMLRPC_METHODS += app_module.MODULE_XMLRPC_METHODS
-    except ImportError as e:
-        raise e
-
-    # Append the Apps to the Installed Apps
-    INSTALLED_APPS += DYNAMIC_APPS
+XMLRPC_METHODS = xmlrpc.MODULE_XMLRPC_METHODS;
+XMLRPC_METHODS += location.MODULE_XMLRPC_METHODS;
 
 
 # A sample logging configuration. The only tangible logging

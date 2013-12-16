@@ -82,6 +82,11 @@ class Services():
             else:
                 return {"status": "yellow"}
 
+    def discover(self, name):
+        for key in self.services:
+            if name in key:
+                return self.services[key]["location"]
+
 
 services = Services()
 
@@ -95,12 +100,17 @@ def remove(name):
     """Simply returns the args passed to it as a string"""
     return services.remove(name)
 
+@xmlrpc_func(context="registry", returns='string', args=['string'])
+def discover(name):
+    """ Discovers a Service by Name"""
+    return services.discover(name)
+
 def view_services(request):
     services.check()
     return render_to_response("registry_overview.pyhtml", {"services": services.get_all()})
 
 
-SERVICES_THAT_SHOULD_BE_AVAILABLE = ["Payment1", "Location1"]
+SERVICES_THAT_SHOULD_BE_AVAILABLE = ["payment1", "location1"]
 
 def get_healthcheck_page(request):
     c = {}

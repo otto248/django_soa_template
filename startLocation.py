@@ -1,20 +1,15 @@
 #!/usr/bin/env python
 import os
 import sys
-from RegistryClient import RegistryClient
-
-from testrpc.settings_helper import DJANGO_STARTUP_APP_KEY
+from registry import RegistryClient
 
 if __name__ == "__main__":
     from django.core.management import execute_from_command_line
 
     # Import Core Settings Module
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "testrpc.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "location.settings")
 
-    # Define Apps to Start With this "Server"
-    os.environ.setdefault(DJANGO_STARTUP_APP_KEY, "location")
-
-    name = "Location1"
+    name = "location1"
 
     registry_client = RegistryClient()
     port = registry_client.register(name)

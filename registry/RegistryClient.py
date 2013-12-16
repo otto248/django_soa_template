@@ -12,3 +12,10 @@ class RegistryClient():
         assert location is not None
 
         return location
+
+    def discover_service(self, context):
+        assert context is not None
+        result = self.rpc_srv.discover(context)
+        assert result is not None
+
+        return result

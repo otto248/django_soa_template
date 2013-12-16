@@ -1,0 +1,1 @@
+MODULE_XMLRPC_METHODS = (('xmlrpc.views.test_xmlrpc', 'test_xmlrpc'), ('xmlrpc.views.ping', 'ping'),)
